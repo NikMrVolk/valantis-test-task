@@ -2,19 +2,19 @@ import { useQuery } from '@tanstack/react-query'
 
 import { itemsService } from '../services/items/items.service'
 import { QueryKeysAndAction } from '../utiles/constants/reactQuery'
+import PageWrapper from '../components/common/PageWrapper'
+import ItemsList from '../components/items/ItemsList'
 
 const MainPage = () => {
-    const { data } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: [QueryKeysAndAction.GET_ITEMS],
         queryFn: () => itemsService.getItemsData({ limit: 50 }),
     })
 
     return (
-        <ul>
-            {data?.result.map((el) => (
-                <li key={el.id}>{el.id}</li>
-            ))}
-        </ul>
+        <PageWrapper className="py-10">
+            {!isLoading && data?.result ? <ItemsList elements={data.result} /> : 'Загрузка...'}
+        </PageWrapper>
     )
 }
 

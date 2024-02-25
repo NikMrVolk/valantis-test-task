@@ -1,5 +1,7 @@
 import axios, { CreateAxiosDefaults } from 'axios'
-import { API_BASE_URL } from '../constants'
+
+import { API_BASE_URL } from '../constants/api'
+
 import { getAuthHash, getContentType } from './api.helpers'
 
 const axiosOptions: CreateAxiosDefaults = {
@@ -13,5 +15,6 @@ export const instance = axios.create(axiosOptions)
 
 instance.interceptors.request.use((config) => {
     config.headers['X-Auth'] = getAuthHash()
+    
     return config
 })

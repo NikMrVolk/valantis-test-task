@@ -14,10 +14,8 @@ export default function Pagination({ changePage, pageCount, className = '' }: Pa
             nextLabel=""
             previousLabel=""
             breakLabel="..."
-            onClick={(el) => {
-                if (el.nextSelectedPage) {
-                    changePage(el.nextSelectedPage)
-                }
+            onPageChange={(el) => {
+                changePage(el.selected)
             }}
             pageRangeDisplayed={5}
             marginPagesDisplayed={2}

@@ -1,10 +1,28 @@
-import { IDefaultResponse, IRequestBody } from './items.type'
+import { IDefaultResponse, IParams, IResponseWithItems } from './items.type'
 
 import { instance } from '../../utiles/api/axios'
+import { QueryKeysAndAction } from '../../utiles/constants/reactQuery'
 
 export const itemsService = {
-    async getItemsId(data: IRequestBody) {
-        const response = await instance.post<IDefaultResponse>(``, JSON.stringify(data))
+    async getItemsId(params: IParams) {
+        const response = await instance.post<IDefaultResponse>(
+            ``,
+            JSON.stringify({ action: QueryKeysAndAction.GET_IDS, params })
+        )
+
+        return response.data
+    },
+
+    async getItemsData(params: IParams) {
+        const itemsId = await this.getItemsId(params)
+
+        const response = await instance.post<IResponseWithItems>(
+            ``,
+            JSON.stringify({
+                action: QueryKeysAndAction.GET_ITEMS,
+                params: { ids: itemsId.result },
+            })
+        )
 
         return response.data
     },

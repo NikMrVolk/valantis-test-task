@@ -1,7 +1,17 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+import MainPage from './pages/MainPage'
+
 import './App.css'
 
+const queryClient = new QueryClient()
+
 function App() {
-    return <h1 className="text-3xl font-bold underline">Hello world!</h1>
+    return (
+        <QueryClientProvider client={queryClient}>
+            <MainPage />
+        </QueryClientProvider>
+    )
 }
 
 export default App

@@ -22,7 +22,7 @@ const MainPage = () => {
         selectedOption,
     })
 
-    const { data, isItemsLoading, refetch } = useItems(params, filterParams)
+    const { data, isItemsLoading, refetch, isError } = useItems(params, filterParams)
 
     const handleChangePage = (pageNumber: number): void => {
         setParams({ ...params, offset: pageNumber })
@@ -49,7 +49,11 @@ const MainPage = () => {
                 onChange={(e) => setSearchValue(e.target.value)}
                 buttonDisabled={isItemsLoading}
             />
-            <ItemsList elements={data?.result} loading={isItemsLoading} />
+            {isError ? (
+                <div className="flex justify-center">Ошибка, попробуйте перезагрузить страницу</div>
+            ) : (
+                <ItemsList elements={data?.result} loading={isItemsLoading} />
+            )}
             <Pagination
                 changePage={handleChangePage}
                 pageCount={pageCount}

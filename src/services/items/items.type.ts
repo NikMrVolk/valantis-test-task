@@ -17,6 +17,8 @@ export interface IResponseWithItems {
 
 export interface IParams {
     price?: number
+    brand?: string
+    product?: string
     offset?: number
     limit?: number
     ids?: string[]

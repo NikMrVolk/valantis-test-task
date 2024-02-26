@@ -1,34 +1,31 @@
 import { useEffect, useState } from 'react'
 
-import { useQuery } from '@tanstack/react-query'
-
-import { itemsService } from '../services/items/items.service'
-import { QueryKeysAndAction } from '../utiles/constants/reactQuery'
+import { useItems } from '../hooks/useItems'
 import { getPageCount } from '../utiles/helpers/pages'
 import PageWrapper from '../components/common/PageWrapper'
 import ItemsList from '../components/items/ItemsList'
 import Pagination from '../components/common/Pagination'
+import { IParams } from '../services/items/items.type'
 
 const MainPage = () => {
-    const [offset, setOffset] = useState<number>(0)
-    const limit = 50
-    const pageCount = getPageCount(limit)
-
-    const { data, isLoading, refetch, isRefetching } = useQuery({
-        queryKey: [QueryKeysAndAction.GET_ITEMS],
-        queryFn: () => itemsService.getItemsData({ offset, limit }),
-        enabled: false,
+    const [params, setParams] = useState<IParams>({
+        limit: 50,
+        offset: 0,
+        price: 0,
+        brand: '',
+        product: '',
     })
+    const pageCount = getPageCount(params.limit as number)
 
-    const isItemsLoading = isLoading || isRefetching
+    const { data, isItemsLoading, refetch } = useItems(params)
 
     const handleChangePage = (pageNumber: number): void => {
-        setOffset(pageNumber)
+        setParams({ ...params, offset: pageNumber })
     }
 
     useEffect(() => {
         refetch()
-    }, [offset])
+    }, [params.offset])
 
     return (
         <PageWrapper className="py-10">
@@ -36,7 +33,7 @@ const MainPage = () => {
             <Pagination
                 changePage={handleChangePage}
                 pageCount={pageCount}
-                className={isItemsLoading ? 'hidden' : ''}
+                className={isItemsLoading || !data?.result.length ? 'hidden' : ''}
             />
         </PageWrapper>
     )

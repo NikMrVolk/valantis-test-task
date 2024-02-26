@@ -13,8 +13,23 @@ export const itemsService = {
         return response.data
     },
 
+    async filterItems(params: IParams) {
+        const response = await instance.post<IDefaultResponse>(
+            ``,
+            JSON.stringify({ action: QueryKeysAndAction.FILTER, params })
+        )
+
+        return response.data
+    },
+
     async getItemsData(params: IParams) {
-        const itemsId = await this.getItemsId(params)
+        let itemsId
+
+        if (params.price || params.brand || params.product) {
+            itemsId = await this.filterItems(params)
+        } else {
+            itemsId = await this.getItemsId(params)
+        }
 
         const response = await instance.post<IResponseWithItems>(
             ``,

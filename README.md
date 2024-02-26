@@ -44,4 +44,8 @@ npm run dev
 
 ### Меню фильтрации со списком товаров
 
+<img width="1440" alt="Screenshot 2024-02-26 at 23 41 26" src="https://github.com/NikMrVolk/valantis-test-task/assets/98909861/a49b1c4b-a68a-470f-a711-62f0c634c12f">
+
 ### Список товаров с меню пагинации
+
+<img width="1440" alt="Screenshot 2024-02-26 at 23 44 48" src="https://github.com/NikMrVolk/valantis-test-task/assets/98909861/d107f279-0c0e-4ac2-b4db-b079015df79e">

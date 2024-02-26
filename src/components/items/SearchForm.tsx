@@ -34,7 +34,7 @@ export default function SearchForm({
             onSubmit={onSubmit}
         >
             <Select
-                className="w-80"
+                className="md:w-80"
                 defaultValue={selectedOption}
                 onChange={setSelectedOption}
                 options={options}

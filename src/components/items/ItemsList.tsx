@@ -1,4 +1,5 @@
 import { IItem } from '../../services/items/items.type'
+import Loader from '../UI/loader/Loader'
 import ItemCard from './ItemCard'
 
 interface ItemsListProps {
@@ -8,7 +9,7 @@ interface ItemsListProps {
 
 export default function ItemsList({ elements, loading }: ItemsListProps) {
     if (loading) {
-        return <div className="flex justify-center">Загрузка...</div>
+        return <Loader />
     }
 
     return (

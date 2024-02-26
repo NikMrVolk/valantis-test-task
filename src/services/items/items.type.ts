@@ -1,4 +1,4 @@
-import { QueryKeysAndAction } from "../../utiles/constants/reactQuery"
+import { QueryKeysAndAction } from '../../utiles/constants/reactQuery'
 
 export interface IDefaultResponse {
     result: string[]
@@ -16,9 +16,6 @@ export interface IResponseWithItems {
 }
 
 export interface IParams {
-    price?: number
-    brand?: string
-    product?: string
     offset?: number
     limit?: number
     ids?: string[]
@@ -28,4 +25,10 @@ export interface IParams {
 export interface IRequestBody {
     action: QueryKeysAndAction
     params: IParams
+}
+
+export interface IFilterOptions {
+    price?: number
+    brand?: string
+    product?: string
 }

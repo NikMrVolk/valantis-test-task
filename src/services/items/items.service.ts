@@ -1,4 +1,4 @@
-import { IDefaultResponse, IParams, IResponseWithItems } from './items.type'
+import { IDefaultResponse, IFilterOptions, IParams, IResponseWithItems } from './items.type'
 
 import { instance } from '../../utiles/api/axios'
 import { QueryKeysAndAction } from '../../utiles/constants/reactQuery'
@@ -13,20 +13,23 @@ export const itemsService = {
         return response.data
     },
 
-    async filterItems(params: IParams) {
+    async filterItems(filterOptions: IFilterOptions) {
         const response = await instance.post<IDefaultResponse>(
             ``,
-            JSON.stringify({ action: QueryKeysAndAction.FILTER, params })
+            JSON.stringify({
+                action: QueryKeysAndAction.FILTER,
+                params: filterOptions,
+            })
         )
 
         return response.data
     },
 
-    async getItemsData(params: IParams) {
+    async getItemsData(params: IParams, filterOptions: IFilterOptions | null) {
         let itemsId
 
-        if (params.price || params.brand || params.product) {
-            itemsId = await this.filterItems(params)
+        if (filterOptions) {
+            itemsId = await this.filterItems(filterOptions)
         } else {
             itemsId = await this.getItemsId(params)
         }

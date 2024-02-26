@@ -8,6 +8,7 @@ interface SearchFormProps {
     setSelectedOption: (e: IOption | null) => void
     value: string
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    buttonDisabled?: boolean
 }
 
 export interface IOption {
@@ -27,6 +28,7 @@ export default function SearchForm({
     selectedOption,
     setSelectedOption,
     onSubmit,
+    buttonDisabled = false,
 }: SearchFormProps) {
     return (
         <form
@@ -41,7 +43,7 @@ export default function SearchForm({
                 placeholder="Искать по..."
             />
             <Input value={value} onChange={onChange} placeholder="Поиск..." className="" />
-            <Button>Искать</Button>
+            <Button disabled={buttonDisabled}>Искать</Button>
         </form>
     )
 }

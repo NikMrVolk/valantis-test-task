@@ -45,12 +45,13 @@ const MainPage = () => {
                 setSelectedOption={setSelectedOption}
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
+                buttonDisabled={isItemsLoading}
             />
             <ItemsList elements={data?.result} loading={isItemsLoading} />
             <Pagination
                 changePage={handleChangePage}
                 pageCount={pageCount}
-                className={isItemsLoading || !data?.result.length ? 'hidden' : ''}
+                className={isItemsLoading || !data?.result.length || filterParams ? 'hidden' : ''}
             />
         </PageWrapper>
     )

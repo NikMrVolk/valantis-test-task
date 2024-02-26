@@ -30,7 +30,9 @@ const MainPage = () => {
 
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        refetch()
+        if (!isItemsLoading) {
+            refetch()
+        }
     }
 
     useEffect(() => {

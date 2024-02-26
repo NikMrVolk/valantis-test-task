@@ -8,7 +8,7 @@ export default function ItemCard({ id, brand, product, price }: ItemCardProps) {
             <div className="h-40 bg-gray-500 rounded-t-xl"></div>
             <div className="flex flex-col gap-2 p-4 flex-auto">
                 <div className="text-1.5xs">{id}</div>
-                <div>{product}</div>
+                <div className='text-lg line-clamp-2'>{product}</div>
                 <div className="font-bold italic">{brand}</div>
                 <div className="font-bold text-xl grow flex items-end justify-end">{price} р.</div>
             </div>

@@ -6,9 +6,11 @@ import PageWrapper from '../components/common/PageWrapper'
 import ItemsList from '../components/items/ItemsList'
 import Pagination from '../components/common/Pagination'
 import { IParams } from '../services/items/items.type'
-import Input from '../components/UI/Input'
+import SearchForm, { IOption } from '../components/items/SearchForm'
 
 const MainPage = () => {
+    const [searchValue, setSearchValue] = useState<string>('')
+    const [selectedOption, setSelectedOption] = useState<IOption | null>(null)
     const [params, setParams] = useState<IParams>({
         limit: 50,
         offset: 0,
@@ -24,13 +26,23 @@ const MainPage = () => {
         setParams({ ...params, offset: pageNumber })
     }
 
+    const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+    }
+
     useEffect(() => {
         refetch()
     }, [params.offset])
 
     return (
         <PageWrapper className="py-10">
-            <Input value='' onChange={() => {}} placeholder='Поиск...' className='mb-10 sm:w-2/4 mx-auto'/>
+            <SearchForm
+                onSubmit={handleSearch}
+                selectedOption={selectedOption}
+                setSelectedOption={setSelectedOption}
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+            />
             <ItemsList elements={data?.result} loading={isItemsLoading} />
             <Pagination
                 changePage={handleChangePage}

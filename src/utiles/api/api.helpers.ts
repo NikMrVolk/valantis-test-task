@@ -7,7 +7,4 @@ export const getContentType = () => ({
     'Content-Type': 'application/json',
 })
 
-// Todo: временно
-export const getAuthHash = () => md5(`${API_KEY}_${moment().format('YYYYMMDD').replace('7', '6')}`)
-
-// export const getAuthHash = () => md5(`${API_KEY}_${moment().format('YYYYMMDD')}`)
+export const getAuthHash = () => md5(`${API_KEY}_${moment().format('YYYYMMDD')}`)
